@@ -1,0 +1,7 @@
+interface:
+  display_name: "Next Issue"
+  short_description: "Find three actionable next tasks."
+  default_prompt: "Use $next-issue to find the three tasks I should do next from known sources, then explain the evidence and first action for each."
+
+policy:
+  allow_implicit_invocation: true
