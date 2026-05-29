@@ -1,0 +1,7 @@
+interface:
+  display_name: "With Linear"
+  short_description: "Work from a Linear issue and keep it updated."
+  default_prompt: "Use $with-linear to work from this Linear issue, keep Linear updated with important status, findings, and conclusions."
+
+policy:
+  allow_implicit_invocation: true
