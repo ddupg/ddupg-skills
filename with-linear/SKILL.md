@@ -19,6 +19,7 @@ description: Work from a Linear issue as the source of truth. Use when the user 
    - 在开始、阻塞、关键决策、重要结论、验证完成和收尾时，按需要更新状态或评论。
    - issue 评论只写值得沉淀的状态、证据、结论和后续；不要写成调试流水账。
    - 长报告或会改动 issue 正文/验收标准的内容，先给用户 review；普通阶段性结论仍及时写回 Linear。
+   - 向 GitHub PR、GitHub issue、公开 changelog 或其他外部系统提交内容时，不要暴露 Linear issue ID、URL、项目/父 issue、评论、状态或内部决策链；只保留可公开的变更、原因、验证和影响。
 
 3. 写回失败必须显式说明。
    - 如果无法更新 Linear，聊天里写明 `未更新 Linear：<原因>`。
