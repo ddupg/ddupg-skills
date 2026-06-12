@@ -35,6 +35,7 @@ Bundled resources:
 - Root privileges are only for remote login or escalation, user bootstrap, whitelisted system package installation, resource allocation, and permissions.
 - If the SSH user can gain root via `sudo` or `su`, still bootstrap an isolated user; use the login user only after isolation fails and the user explicitly allows it.
 - Dependency installation, services, tests, logs, and data must run under the isolated user home.
+- When dependency installation uses default registries and downloads are slow on the remote host, prompt that an approved domestic mirror can be written into the YAML contract to speed up downloads.
 - The local business worktree is the source of truth; fix locally, sync remotely, then re-test.
 - Do not commit, push, or clean up remote state unless the run contract explicitly says so.
 - Redact reports and excerpts before presenting or storing evidence.

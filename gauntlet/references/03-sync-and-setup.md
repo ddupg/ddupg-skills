@@ -39,7 +39,7 @@ sudo -iu "<allocated-user>" bash -lc '
 
 依赖安装命令必须来自 YAML，不允许仅凭猜测执行。常见例子：
 
-远程机器下载依赖很慢时，可以把用户或项目允许的国内源写入 YAML 并在安装命令中使用，例如 npm/pnpm registry 或 pip `-i <mirror>`；不要只在远端临时手改。
+远程机器使用默认源安装依赖时经常遇到网络慢或超时。出现这类迹象时，先提示用户可以尝试国内源加快下载速度；确认用户或项目允许后，把 registry/mirror 固化到 YAML 的安装命令中，例如 npm/pnpm registry 或 pip `-i <mirror>`；不要只在远端临时手改。
 
 ```bash
 sudo -iu "<allocated-user>" bash -lc '
