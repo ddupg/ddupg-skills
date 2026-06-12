@@ -1,0 +1,37 @@
+{
+  "status": "passed|failed|blocked",
+  "requirement": {
+    "id": "",
+    "title": "",
+    "description": "",
+    "acceptance_criteria": []
+  },
+  "remote": {
+    "host": "",
+    "user": "",
+    "workdir": "",
+    "ports": [],
+    "allocation_state": "/opt/gauntlet/state/allocations.json"
+  },
+  "sync": {
+    "mode": "rsync|git",
+    "source_of_truth": "local_worktree",
+    "local_repo": "",
+    "remote_repo": ""
+  },
+  "iterations": [],
+  "commands": [],
+  "logs": [],
+  "fix_summary": {
+    "changed_files": [],
+    "diff_summary": "",
+    "committed": false,
+    "pushed": false
+  },
+  "evidence": [],
+  "blockers": [],
+  "cleanup": {
+    "policy": "retain",
+    "release_command": ""
+  }
+}

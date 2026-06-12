@@ -1,0 +1,75 @@
+run:
+  id: example-feature-smoke
+  requirement_slug: example-feature-smoke
+  created_at: "2026-05-19T00:00:00Z"
+  cleanup: retain
+
+requirement:
+  title: Verify example feature on real integration environment
+  description: "Replace with the concrete development test requirement."
+  source_of_truth_repo: local
+
+acceptance_criteria:
+  - Real integration command completes successfully.
+  - The feature is verified against the declared test namespace.
+  - Any bug fix is made in the local repository and re-synced before final validation.
+
+remote:
+  ssh:
+    host: linux.example.com
+    port: 22
+    user: root
+    identity_file: ~/.ssh/id_rsa
+  allocation:
+    state_path: /opt/gauntlet/state/allocations.json
+    work_root: /home
+    user: ""
+    workdir: ""
+    ports: []
+  system_packages:
+    allow_install: true
+    whitelist:
+      - git
+      - rsync
+      - curl
+      - tar
+      - ca-certificates
+      - build-essential
+      - python3
+      - python3-venv
+
+resources:
+  ports:
+    range: "30000-30999"
+    count: 1
+  disk:
+    min_free_gb: 20
+  external_namespaces:
+    - kind: database_schema
+      name: gauntlet_example_feature_smoke
+      destructive_actions_allowed: true
+      production_resources_forbidden: true
+
+sync:
+  mode: rsync
+  primary_repo_remote_subdir: repo
+  source_of_truth: local_worktree
+
+execution:
+  max_fix_iterations: 3
+  final_gate: real_integration
+  supplemental_profiles:
+    - local_unit
+  env:
+    GAUNTLET_REQUIREMENT: example-feature-smoke
+  commands:
+    setup:
+      - profile: project.dependencies.install
+    test:
+      - profile: project.test_profiles.real_integration
+
+reporting:
+  logs_dir: .gauntlet/example-feature-smoke/logs
+  report_path: .gauntlet/example-feature-smoke/report.md
+  result_path: .gauntlet/example-feature-smoke/result.json
+  redact: true

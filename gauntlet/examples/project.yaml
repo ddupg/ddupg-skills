@@ -1,0 +1,68 @@
+project:
+  name: example-service
+  root: /path/to/business/repo
+  gauntlet_dir: .gauntlet
+  notes: "Local profile. Do not commit by default."
+
+repositories:
+  primary:
+    mode: rsync
+    local_path: /path/to/business/repo
+    remote_subdir: repo
+    git:
+      url: ""
+      ref: ""
+  dependencies:
+    - name: optional-related-service
+      mode: git
+      local_path: ""
+      remote_subdir: related-service
+      git:
+        url: git@example.com:org/related-service.git
+        ref: main
+
+runtimes:
+  manager: mise
+  mise:
+    install_authorized: true
+  node:
+    version: "22"
+    registry: https://registry.npmjs.org/
+  python:
+    version: "3.11"
+    venv: .venv
+
+dependencies:
+  install:
+    - name: node dependencies
+      cwd: repo
+      command: pnpm install
+      timeout_seconds: 900
+    - name: python dependencies
+      cwd: repo
+      command: python -m venv .venv && . .venv/bin/activate && pip install -r requirements.txt
+      timeout_seconds: 900
+
+test_profiles:
+  real_integration:
+    description: Final gate. Must use real test namespace.
+    service_start:
+      cwd: repo
+      command: pnpm run dev -- --port "$GAUNTLET_PORT_0"
+      healthcheck: curl -fsS "http://127.0.0.1:$GAUNTLET_PORT_0/health"
+    tests:
+      - cwd: repo
+        command: pnpm test:integration
+        timeout_seconds: 1200
+  local_unit:
+    description: Supplemental locator only.
+    tests:
+      - cwd: repo
+        command: pnpm test
+        timeout_seconds: 600
+
+secrets:
+  policy: local_plaintext_allowed_report_must_redact
+  env:
+    EXAMPLE_API_KEY: replace-locally
+    EXAMPLE_PASSWORD: replace-locally
