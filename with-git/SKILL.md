@@ -9,7 +9,7 @@ description: Use when the user asks to create or work in a git worktree, commit,
 
 ## Worktree 规则
 
-- 创建 worktree 时默认放在原项目同级目录，命名为 `<原项目目录名>.<slug>`；例如 `~/project/lance` -> `~/project/lance.<slug>`。
+- 默认使用 sibling worktree。
 
 ## PR 发布规则
 
