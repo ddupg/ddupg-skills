@@ -11,6 +11,10 @@ description: Use when the user asks to create or work in a git worktree, commit,
 
 - 默认使用 sibling worktree。
 
+## 分支命名规则
+
+- 新建分支使用 `feat/`、`fix/`、`chore/` 等前缀，不使用 `codex/`。
+
 ## PR 发布规则
 
 - `git push`、`gh pr create`、必要的 `gh pr view` 直接请求提升权限执行，不先在 sandbox 里试错。
