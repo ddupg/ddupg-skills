@@ -1,0 +1,4 @@
+interface:
+  display_name: "双向钢人论证"
+  short_description: "使用最强正反论证重述问题、厘清分歧并识别改变结论的关键变量"
+  default_prompt: "使用 $steelman 对这个问题做双向钢人论证："
