@@ -11,3 +11,4 @@
 | `gauntlet` | 使用 Gauntlet 在真实 Linux 隔离用户环境中做集成验证：编写 `.gauntlet` YAML 契约、引导远端用户、同步本地 worktree、执行 test-and-fix 循环，并产出脱敏证据报告。 |
 | `with-git` | 沉淀 git worktree 与 GitHub PR 发布收尾里的非默认最佳路径，包括 sibling worktree 与 GitHub 命令提权执行。 |
 | `steelman` | 对观点、计划或决策做双向钢人论证，先厘清正反论据、分歧与关键变量，再给出判断。 |
+| `visual-explanation` | 创建、评审或重绘架构图、调用链、流程图、机制解释图与其他技术可视化。 |
