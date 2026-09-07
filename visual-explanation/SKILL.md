@@ -16,5 +16,5 @@ Let the subject determine the visual language. Do not default to card grids, fam
 Critique the result:
 
 - If most text disappeared, would the structure still communicate?
-- If a list could replace the diagram without losing meaning, redesign it.
-- If the output is renderable, inspect the rendered result and revise it.
+- Check whether the diagram makes the subject easier to understand than a list or prose; simplify or redesign it when it adds no clarity.
+- If the output is renderable, inspect the rendered result and revise it when you find concrete problems.
