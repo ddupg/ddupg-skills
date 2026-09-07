@@ -17,6 +17,6 @@ description: Use when the user asks to create or work in a git worktree, commit,
 
 ## PR 发布规则
 
-- `git push`、`gh pr create`、必要的 `gh pr view` 直接请求提升权限执行，不先在 sandbox 里试错。
-- commit message 和 PR title 不强制固定格式，但创建前提醒检查目标仓库/社区风格与标题检查要求。
+- 需要写入 Git 元数据或访问远端的 Git/GitHub 命令，直接请求提升权限执行，不先在 sandbox 中尝试。纯本地只读检查按正常权限执行。
+- commit message 和 PR title 由目标仓库的现有风格及检查要求决定；创建前自行检查并遵循，不强制统一格式。
 - 默认创建 draft PR，除非用户明确要求 ready PR。
