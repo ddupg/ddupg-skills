@@ -1,41 +1,28 @@
 ---
 name: gauntlet
-description: "Use Gauntlet for real Linux isolated-user integration testing: create .gauntlet YAML contracts, bootstrap remote users, sync local worktrees, run test-and-fix loops, and produce redacted report.md/result.json evidence."
+description: 在远程 Linux 机器上做隔离验证。适用于需要在独立用户环境中复现问题、验证本地改动或运行真实集成测试的场景。
 ---
 
 # Gauntlet
 
-Gauntlet is a self-contained workflow for validating a development requirement on a real Linux host under an isolated user.
+在远程机器上准备隔离环境，运行能够回答当前问题的验证，并给出可追溯的结果。按任务需要组织工作，不要求固定阶段或配置文件。
 
-## Skill Root
+## 工作方式
 
-Resolve `<Gauntlet skill>` as the directory containing this `SKILL.md`.
+1. 明确验证目标、远端入口和验收依据。先读相关项目配置，并在已授权的机器上做只读调查；只询问无法自行获取且影响执行的信息，相关问题可合并提出。
+2. 创建或复用本任务专用的非 root 用户及其工作目录。同步待验证的代码或产物，复用满足要求的运行时，只补齐实际需要的依赖；需要服务时再准备端口和检查服务是否就绪。
+3. 执行与目标对应的验证，根据失败证据定位原因。在已授权范围内修复并复测；业务代码以本地 worktree 为准，修复后重新同步，确保最终验证覆盖最新改动。
+4. 汇报通过、失败或阻塞，附远端环境、代码版本或改动范围、关键命令、退出码和日志位置，说明未覆盖项及遗留资源。需要留档时可写入 `.gauntlet/<requirement>/`，格式和篇幅按任务需要决定。
 
-Bundled resources:
+## 基本约束
 
-- Main workflow: `references/workflow.md`
-- Stage details: `references/01-intake.md` through `references/05-reporting.md`
-- Example contracts: `examples/project.yaml` and `examples/run.yaml`
-- Helper scripts: `scripts/`
-- Report templates: `templates/report.md` and `templates/result.json`
+- 项目依赖、服务和测试在隔离用户下运行，源码、日志和数据放在该用户拥有的工作目录中，默认位于其 home。root 仅用于用户与权限管理、必要的资源准备及已授权的系统包安装；无法建立隔离时说明阻塞，不直接改用 root 或共享登录环境运行测试。
+- 端口、目录和外部测试命名空间与其他任务分离，遵守资源预算，不触碰生产数据或他人资源。已有授权持续有效；只有操作超出现有授权时才补充确认。
+- 通过结论必须有实际执行证据。目标涉及真实集成时，mock 或单测不能替代真实集成结果。
+- 根据新证据推进修复，不固定轮数；达到用户预算、需要额外授权或缺少必要条件且无法自行解决时停止，说明原因和下一步，避免无新证据地重复尝试。
+- 日志、报告和展示内容避免泄露凭据；不要把含密钥的原始输出直接写入共享产物。
+- 未获授权不 commit、push 或清理远端现场；获准清理时只处理本任务资源，并核实清理结果。
 
-## Workflow
+## 可选工具
 
-1. Read `references/workflow.md` first.
-2. Follow the referenced stages in order.
-3. Create or update `.gauntlet/project.yaml` and `.gauntlet/<requirement>/run.yaml` in the business project before any remote command.
-4. Use `<Gauntlet skill>/scripts/*` for deterministic helper operations.
-5. Write final evidence to `.gauntlet/<requirement>/report.md` and `.gauntlet/<requirement>/result.json`.
-
-## Core Rules
-
-- Investigate discoverable project facts before asking the user.
-- Ask only for product intent, credentials, real resources, destructive authorization, or other facts that cannot be discovered locally.
-- Real integration tests are the final gate; mocks and unit tests are only supplemental.
-- Root privileges are only for remote login or escalation, user bootstrap, whitelisted system package installation, resource allocation, and permissions.
-- If the SSH user can gain root via `sudo` or `su`, still bootstrap an isolated user; use the login user only after isolation fails and the user explicitly allows it.
-- Dependency installation, services, tests, logs, and data must run under the isolated user home.
-- When dependency installation uses default registries and downloads are slow on the remote host, prompt that an approved domestic mirror can be written into the YAML contract to speed up downloads.
-- The local business worktree is the source of truth; fix locally, sync remotely, then re-test.
-- Do not commit, push, or clean up remote state unless the run contract explicitly says so.
-- Redact reports and excerpts before presenting or storing evidence.
+需要辅助分配资源、创建用户、同步文件或处理报告时，按需读取 [辅助脚本说明](references/helpers.md)。脚本是可选工具，不要求安装特定运行时管理器或套用 YAML 合同。

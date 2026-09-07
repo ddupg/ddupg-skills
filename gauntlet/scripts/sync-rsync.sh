@@ -6,10 +6,8 @@ usage() {
 Usage:
   sync-rsync.sh --source DIR --target USER@HOST:DIR [--ssh "ssh ..."]
 
-Synchronize the local source-of-truth worktree to the remote run directory.
-This helper intentionally does not delete .gauntlet run artifacts on the
-business repository side. Project-specific sync changes should be captured in
-run.yaml before changing this helper.
+Synchronize the local source-of-truth worktree to a dedicated remote source copy.
+Uses --delete; keep remote runtime data and logs outside the target directory.
 USAGE
 }
 
