@@ -5,4 +5,4 @@
 - `scripts/bootstrap-remote-user.sh`：在远端以 root 创建用户并设置 home 权限。目标必须是本任务专用用户和目录，脚本会递归修改目录所有权。默认不安装系统包；`--install-base-packages` 安装的是脚本内固定的整组包，不读取项目白名单，仅在整组包均获准且需要时使用。
 - `scripts/alloc-resource.py`：多个任务共用机器时，用加锁的 JSON 台账协调用户名、目录和端口。台账不检查系统中已有的用户或监听端口，也不实际保留端口，使用前仍需核对远端状态。`release` 只释放台账记录，不停止服务或删除用户；应在实际资源清理后执行。
 - `scripts/sync-rsync.sh`：从本地同步 worktree。带有 `--delete`，只用于本任务的远端源码副本；需保留的运行数据和日志应放在同步目录之外。同步后确保隔离用户具有所需权限。
-- `scripts/redact-report.py`：辅助处理部分常见凭据格式，不能保证完整脱敏；带前缀的环境变量和 JSON 字段可能漏检，普通 UUID 也会被替换。按实际凭据格式检查输出，保留安全且有助于排障的关联信息。
+- `scripts/redact-report.py`：按常见敏感键名遮蔽键值行（含带前缀的环境变量）及 JSON 标量字段，并处理 Bearer token 和 `sk-` 密钥格式。普通 UUID 保留，仅在敏感字段中遮蔽。不能保证覆盖所有凭据格式，仍需按实际内容检查输出。回归检查可运行 `python3 <skill-root>/tests/test_redact_report.py`。
