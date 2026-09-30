@@ -5,16 +5,39 @@ description: Create, critique, or redraw architecture diagrams, call chains, pro
 
 # Visual Explanation
 
-Design a visual argument, not formatted text.
+让图承担解释：读者应能从视觉结构中看见关系、机制或差异。
 
-Ground the visual in the actual subject, audience, and evidence. Decide the one question each diagram should answer before choosing a format.
+## 从问题选择表达
 
-Identify what must become visible: structure, flow, causality, containment, transformation, state, scale, or tension. Choose a composition whose geometry expresses that relationship. Use real entities and data where available.
+结合实际对象、读者和证据，先确定每张图需要回答的问题，再选择形式。优先使用足以讲清楚问题的简洁静态图；只有观察变化、探索输入或逐步追踪确实有帮助时，才增加交互。不要为了快速理解引入复杂的查看器、导出流程或装饰。
 
-Let the subject determine the visual language. Do not default to card grids, familiar templates, or a preferred renderer.
+找出影响理解的事实，以及读者原本需要在脑中补全的关系。根据这些关系组织图形，而不是把原文逐句装进框里，也不要把所有问题都转换成模块或函数调用链。
 
-Critique the result:
+| 需要看见的含义 | 可采用的视觉表达 |
+| --- | --- |
+| 连接、方向与传递 | 对象之间有明确含义和方向的连线 |
+| 包含、边界与归属 | 嵌套区域、边界及对象在区域中的位置 |
+| 顺序、位置与范围 | 有序排列、坐标、对齐及区间 |
+| 时间、重叠与依赖 | 共用时间轴的活动、事件和依赖关系 |
+| 状态、身份与变换 | 保持对象身份的状态对照，显示操作改变了什么 |
+| 数量、比例与差异 | 有单位和一致尺度的位置、长度、面积或其他数量编码 |
 
-- If most text disappeared, would the structure still communicate?
-- Check whether the diagram makes the subject easier to understand than a list or prose; simplify or redesign it when it adds no clarity.
-- If the output is renderable, inspect the rendered result and revise it when you find concrete problems.
+这些是选择表达方式的依据，不是固定模板。让实际对象决定图形的构造；必要时组合几种表达，但不要加入与问题无关的维度。结构、顺序和尺度即使没有动画，也可以用准确的几何关系表达。
+
+## 让机制可见
+
+- 用位置、包含、对齐、范围或变化表达实际关系。框和箭头应承担明确含义；仅列出对象名称及笼统连接，不能解释对象内部如何工作。
+- 解释实际代码或系统时，核对支撑关键关系的源码或运行证据。名称、文件位置和调用关系本身不能证明运行时的归属、并行、等待或因果。
+- 当问题取决于执行或数据变换时，选一个能暴露关键行为的小例子，展示必要的中间状态、关键操作和结果。结构解释不必强行加执行步骤。
+- 保持步骤或方案之间的对象身份、坐标、尺度和符号一致，让差异直接可见。需要同时比较时保留对齐的状态；需要追踪长过程时再考虑逐步切换。
+- 标注连线和操作的具体含义，区分不同关系。把必要的短解释放在对应图形旁边，不用框内长段文字替代视觉表达。
+- 不要为了画完整而编造数值、布局、时序或关系。区分已验证事实、推断和教学简化；示意图不应暗示实际比例、精确耗时或唯一执行顺序。
+- 不预设卡片网格、熟悉的模板或偏好的渲染器。选择能表达所需关系的最轻形式；无法用节点和连线讲清楚时，采用更合适的空间构图。
+
+## 检查表意效果
+
+- 图是否回答了最初的问题？机制解释中，读者能否定位关键对象、看见关键变化，并理解触发变化的条件？
+- 保留必要标注、去掉长段说明后，几何结构是否仍表达了有用的信息？关键含义是否完全依赖图外文字？
+- 对齐、分组、距离、尺寸或箭头有没有暗示未经证实的事实？比较中的差异是否来自对象本身，而非绘图方式改变？
+- 相比列表或文字，图是否减少了读者需要自行推演的内容？没有增加清晰度时，简化或更换表达方式。
+- 输出可渲染时，检查实际渲染结果；发现具体问题再修改，不为追求精美反复增加装饰。
