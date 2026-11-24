@@ -10,6 +10,7 @@ description: Use when the user asks to create or work in a git worktree, commit,
 ## Worktree 规则
 
 - 默认使用 sibling worktree。
+- 关联 Linear issue 时，新 worktree 目录名用 `<repo>.<issue-id>-<topic>`。
 
 ## 分支命名规则
 
