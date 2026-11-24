@@ -14,7 +14,7 @@ description: Use when the user asks to create or work in a git worktree, commit,
 
 ## 分支命名规则
 
-- 新建分支使用 `feat/`、`fix/`、`chore/` 等前缀，不使用 `codex/`。
+- 新建分支按用途选择前缀（如 Conventional Branch 的 `feat/`、`fix/`、`chore/`），禁用 `codex/`。
 
 ## PR 发布规则
 
